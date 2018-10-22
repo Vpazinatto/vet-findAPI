@@ -1,0 +1,27 @@
+{
+  "name": "vet-findapi",
+  "version": "1.0.0",
+  "description": "API do app VetFind",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vpazinatto/vet-findAPI.git"
+  },
+  "keywords": [
+    "API",
+    "pet"
+  ],
+  "author": "Vinicius, Giovanni, Fernando",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vpazinatto/vet-findAPI/issues"
+  },
+  "homepage": "https://github.com/Vpazinatto/vet-findAPI#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "http": "0.0.0"
+  }
+}
