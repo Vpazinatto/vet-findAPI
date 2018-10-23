@@ -1,6 +1,6 @@
 function VeterinarioDAO(connection) {
     this._connection = connection;
-}
+};
 
 VeterinarioDAO.prototype.lista = function(callback) {
     this._connection.query('select * from veterinario', callback);
