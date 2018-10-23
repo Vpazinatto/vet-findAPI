@@ -1,7 +1,17 @@
 var express = require('express');
+var consign = require('consign');
+var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
 
 module.exports = function(app) {
     var app = express();
+
+    app.use(bodyParser.urlencoded({extended: true}));    
+    app.use(bodyParser.json());
+
+    app.use(expressValidator());
+    
+    consign().include('controllers').then('database').into(app);
 
     return app;
 }
