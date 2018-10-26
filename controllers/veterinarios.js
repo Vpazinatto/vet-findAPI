@@ -62,10 +62,10 @@ module.exports = function(app) {
     });
 
     app.post('/veterinarios/veterinario', function(req, res) {
-        var veterinario = req.body["veterinario"];
+        var veterinario = req.body;
 
         var requestPost = new mssql.Request();
-        requestPost.query("INSERT INTO veterinario VALUES ('" + veterinario.nome + "', '" +  veterinario.cpf + "')", function(err, result) {
+        requestPost.query("INSERT INTO veterinario VALUES ('" + veterinario.nome + "', '" +  veterinario.CPF + "')", function(err, result) {
             if (err) {
                 console.log('Erro ao inserir no banco: ' + err);
                 res.status(500).send(err);
@@ -79,8 +79,6 @@ module.exports = function(app) {
             }
 
             res.status(201).json(response);
-
-
         });
     });
 
