@@ -11,7 +11,7 @@ module.exports = function(app) {
     
     mssql.connect(config, function(err) {
         if (err) {
-            console.log("Error: " + err);
+            console.log("erro: " + err);
             return;
         }
         
@@ -21,14 +21,14 @@ module.exports = function(app) {
 
     app.get('/veterinarios', function(req, res) {
         var requestGetAll = new mssql.Request();   
-        requestGetAll.query('SELECT * FROM veterinario', function (erro, veterinarios) {
+        requestGetAll.query('SELECT * FROM veterinario', function (err, veterinarios) {
             
-            if (erro) {
-                console.log(erro);
+            if (err) {
+                res.status(500).send(err);
                 return;
             }
 
-            res.send(veterinarios.json());
+            res.json(veterinarios);
         });
     });
 
@@ -38,14 +38,51 @@ module.exports = function(app) {
 
         var requestGetID = new mssql.Request();
         requestGetID.query('SELECT * FROM veterinario WHERE id = ' + id, function(err, veterinario) {
-            if (erro) {
-                console.log(erro);
+            if (err) {
+                res.status(500).send(err);
                 return;
             }
 
-            res.send(veterinario.json());
+            res.json(veterinario);
         });
-
-
     });
+
+    app.delete('/veterinarios/veterinario/:id', function(req, res) {
+        var id = req.params.id;
+        console.log("Deletando pagamento: " + id);
+
+        var requestDelete = new mssql.Request();
+        requestDelete.query('DELETE FROM veterinario WHERE id = ' + id, function(err, veterinario) {
+            if (err) {
+                res.status(500).send(err);
+                return;
+            }
+            res.send('Veterinario excluido');
+        });
+    });
+
+    app.post('/veterinarios/veterinario', function(req, res) {
+        var veterinario = req.body["veterinario"];
+
+        var requestPost = new mssql.Request();
+        requestPost.query("INSERT INTO veterinario VALUES ('" + veterinario.nome + "', '" +  veterinario.cpf + "')", function(err, result) {
+            if (err) {
+                console.log('Erro ao inserir no banco: ' + err);
+                res.status(500).send(err);
+            }
+            
+            veterinario.id = result.insertId;
+            res.location('/veterinarios/veterinario/' + veterinario.id);
+
+            var response = {
+                dados_veterinario: veterinario
+            }
+
+            res.status(201).json(response);
+
+
+        });
+    });
+
+
 }
