@@ -21,14 +21,14 @@ module.exports = function(app) {
 
     app.get('/veterinarios', function(req, res) {
         var requestGetAll = new mssql.Request();   
-        requestGetAll.query('SELECT * FROM veterinario', function (err, veterinarios) {
+        requestGetAll.query('SELECT * FROM veterinario', function (err, results) {
             
             if (err) {
                 res.status(500).send(err);
                 return;
             }
 
-            res.json(veterinarios);
+            res.json(results);
         });
     });
 
@@ -37,13 +37,13 @@ module.exports = function(app) {
         console.log("Consultando pagamento: " + id);
 
         var requestGetID = new mssql.Request();
-        requestGetID.query('SELECT * FROM veterinario WHERE id = ' + id, function(err, veterinario) {
+        requestGetID.query('SELECT * FROM veterinario WHERE id = ' + id, function(err, result) {
             if (err) {
                 res.status(500).send(err);
                 return;
             }
 
-            res.json(veterinario);
+            res.json(result);
         });
     });
 
@@ -52,12 +52,29 @@ module.exports = function(app) {
         console.log("Deletando pagamento: " + id);
 
         var requestDelete = new mssql.Request();
-        requestDelete.query('DELETE FROM veterinario WHERE id = ' + id, function(err, veterinario) {
+        requestDelete.query('DELETE FROM veterinario WHERE id = ' + id, function(err, result) {
             if (err) {
                 res.status(500).send(err);
                 return;
             }
             res.send('Veterinario excluido');
+        });
+    });
+
+    app.put('/veterinarios/veterinario/:id', function(req, res) {
+
+        var id = req.params.id;
+        var veterinario = req.body;
+
+        veterinario.id = id;
+
+        var requestDelete = new mssql.Request();
+        requestDelete.query('DELETE FROM veterinario WHERE id = ' + id, function(err, result) {
+            if (err) {
+                res.status(500).send(err);
+                return;
+            }
+            res.json(veterinario);
         });
     });
 
