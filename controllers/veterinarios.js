@@ -98,6 +98,4 @@ module.exports = function(app) {
             res.status(201).json(response);
         });
     });
-
-
 }
