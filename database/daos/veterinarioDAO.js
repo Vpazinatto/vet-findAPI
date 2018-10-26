@@ -1,4 +1,4 @@
-function VeterinarioDAO(connection) {
+/*function VeterinarioDAO(connection) {
     this._connection = connection;
 };
 
@@ -20,4 +20,4 @@ VeterinarioDAO.prototype.buscaPorId = function(id, callback) {
 
 module.exports = function() {
     return VeterinarioDAO;
-};
+};*/
