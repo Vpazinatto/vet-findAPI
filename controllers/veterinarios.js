@@ -69,7 +69,7 @@ module.exports = function(app) {
         veterinario.id = id;
 
         var requestDelete = new mssql.Request();
-        requestDelete.query('DELETE FROM veterinario WHERE id = ' + id, function(err, result) {
+        requestDelete.query('UPDATE FROM veterinario SET CPF =' + veterinario.CPF + ' WHERE id = ' + id, function(err, result) {
             if (err) {
                 res.status(500).send(err);
                 return;
