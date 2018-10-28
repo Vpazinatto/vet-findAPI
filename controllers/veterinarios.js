@@ -1,23 +1,8 @@
-var mssql = require('mssql');
+//var mssql = require('mssql');
 
 module.exports = function(app) { 
- 
-    var config = {
-        user: 'BD17422',
-        password: 'BD17422',
-        server: 'regulus.cotuca.unicamp.br',
-        database: 'BD17422'
-    };
-    
-    mssql.connect(config, function(err) {
-        if (err) {
-            console.log("erro: " + err);
-            return;
-        }
-        
-        console.log("Funcionou!");
 
-    });
+    var con = new app.database.connectionFactory();
 
     app.get('/veterinarios', function(req, res) {
         var requestGetAll = new mssql.Request();   

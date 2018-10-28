@@ -1,4 +1,4 @@
-/*var mssql = require('mssql');
+var mssql = require('mssql');
 
 var config = {
     user: 'BD17422',
@@ -7,7 +7,7 @@ var config = {
     database: 'BD17422'
 };
 
-mssql.connect(config, function(err) {
+var con = mssql.connect(config, function(err) {
     if (err) {
         console.log("Error: " + err);
         return;
@@ -16,7 +16,8 @@ mssql.connect(config, function(err) {
     console.log("Funcionou!");
 });
 
-module.exports = function () {
-    return sql;
-} 
-*/
+mssql.globalConnection = con;
+
+module.exports = function() {
+    return con;
+}
