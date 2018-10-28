@@ -13,11 +13,7 @@ var con = mssql.connect(config, function(err) {
         return;
     }
     
-    console.log("Funcionou!");
+    console.log("Conectado ao banco");
 });
 
 mssql.globalConnection = con;
-
-module.exports = function() {
-    return con;
-}

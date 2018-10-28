@@ -1,8 +1,6 @@
-//var mssql = require('mssql');
+var mssql = require('mssql');
 
 module.exports = function(app) { 
-
-    var con = new app.database.connectionFactory();
 
     app.get('/veterinarios', function(req, res) {
         var requestGetAll = new mssql.Request();   
@@ -54,7 +52,7 @@ module.exports = function(app) {
         veterinario.id = id;
 
         var requestDelete = new mssql.Request();
-        requestDelete.query('UPDATE FROM veterinario SET CPF =' + veterinario.CPF + ' WHERE id = ' + id, function(err, result) {
+        requestDelete.query("UPDATE FROM veterinario SET CPF ='" + veterinario.CPF + "' WHERE id = " + id, function(err, result) {
             if (err) {
                 res.status(500).send(err);
                 return;
