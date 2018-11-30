@@ -15,5 +15,3 @@ var con = mssql.connect(config, function(err) {
     
     console.log("Conectado ao banco");
 });
-
-mssql.globalConnection = con;
